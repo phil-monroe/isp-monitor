@@ -1,16 +1,6 @@
-require 'pry'
-require 'json'
-require 'net/http'
-require 'active_support'
-require 'active_support/core_ext'
-require 'logstash-logger'
+#!/usr/bin/env ruby
 
-LOGGER = LogStashLogger.new(
-  type: :multi_delegator,
-  outputs: [
-    { type: :stdout },
-    { type: :tcp, host: 'localhost', port: 50000 }
-  ])
+require_relative 'lib/environment'
 
 def log_event(event, payload={})
   LOGGER.info message: event, host: {name: 'localhost'},  **payload

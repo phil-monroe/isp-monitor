@@ -1,29 +1,10 @@
 #!/usr/bin/env ruby
 
-require 'pry'
-require 'json'
-require 'net/http'
-require 'net/ping'
-require 'active_support'
-require 'active_support/core_ext'
-require 'logstash-logger'
-
-LOGGER = LogStashLogger.new(
-  type: :multi_delegator,
-  outputs: [
-    { type: :stdout },
-    { type: :tcp, host: 'localhost', port: 50000 }
-  ])
-
-def log_event(event, payload={})
-  LOGGER.info message: event, service: 'monitor-ping', **payload
-end
-
-log_event('start')
-
+SERVICE='monitor-ping'
+require_relative 'lib/environment'
 
 def ping(target, count: 10)
-  icmp = Net::Ping::ICMP.new(target)
+  icmp = Net::Ping::ICMP.new(target, nil, 1)
 
   response_times = []
   ping_fails = 0
@@ -66,15 +47,10 @@ rescue StandardError => e
   puts e.backtrace
 end
 
-loop do
-  ARGV.each do |ping_target|
-    ping ping_target
+scheduler do
+  ARGV.map do |ping_target|
+    every '10s', overlap: false do
+      ping ping_target
+    end
   end
-
-  # sleep until the next minute
-  sleep_until = 1.minute.from_now.change(sec: 0)
-  sleep_seconds = sleep_until - Time.current
-  # sleep(sleep_seconds)
-  sleep 10
 end
-

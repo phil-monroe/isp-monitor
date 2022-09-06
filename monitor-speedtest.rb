@@ -1,27 +1,9 @@
 #!/usr/bin/env ruby
 
-require 'pry'
-require 'json'
-require 'net/http'
-require 'net/ping'
-require 'active_support'
-require 'active_support/core_ext'
-require 'logstash-logger'
+SERVICE = 'monitor-speedtest'
+require_relative 'lib/environment'
 
-LOGGER = LogStashLogger.new(
-  type: :multi_delegator,
-  outputs: [
-    { type: :stdout },
-    { type: :tcp, host: 'localhost', port: 50000 }
-  ])
-
-def log_event(event, payload={})
-  LOGGER.info message: event, service: 'monitor-speedtest', **payload
-end
-
-log_event('start')
-
-def run_speedtest
+def speedtest
   # result = `cat example-speedtest.json`
   result = `speedtest --format json`
   data = JSON.parse(result)
@@ -55,13 +37,12 @@ rescue StandardError => e
   puts e.backtrace
 end
 
-loop do
-  run_speedtest
+# initial run
+speedtest
 
-  # sleep until the next minute
-  sleep_until = 1.minute.from_now.change(sec: 0)
-  sleep_seconds = sleep_until - Time.current
-  # sleep(sleep_seconds)
-  sleep 10.minutes
+# then every 10 minutes after that
+scheduler do
+  every '10m', overlap: false do
+    speedtest
+  end
 end
-
