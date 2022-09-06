@@ -1,0 +1,54 @@
+{
+  "type": "result",
+  "timestamp": "2022-09-05T21:00:02Z",
+  "ping": {
+      "jitter": 3.683,
+      "latency": 41.863,
+      "low": 39.254,
+      "high": 53.984
+  },
+  "download": {
+      "bandwidth": 7754837,
+      "bytes": 75714472,
+      "elapsed": 9719,
+      "latency": {
+          "iqm": 120.721,
+          "low": 28.255,
+          "high": 430.674,
+          "jitter": 37.386
+      }
+  },
+  "upload": {
+      "bandwidth": 2785021,
+      "bytes": 35168058,
+      "elapsed": 14994,
+      "latency": {
+          "iqm": 44.993,
+          "low": 17.411,
+          "high": 1098.230,
+          "jitter": 22.257
+      }
+  },
+  "isp": "Spectrum",
+  "interface": {
+      "internalIp": "10.0.0.114",
+      "name": "en0",
+      "macAddr": "F4:D4:88:73:07:1A",
+      "isVpn": false,
+      "externalIp": "74.133.18.172"
+  },
+  "server": {
+      "id": 16969,
+      "host": "speedtest.ohiordc.rr.com",
+      "port": 8080,
+      "name": "Spectrum",
+      "location": "Columbus, OH",
+      "country": "United States",
+      "ip": "65.24.3.227"
+  },
+  "result": {
+      "id": "f180e2b9-6123-4f62-b43d-b14a356d7777",
+      "url": "https://www.speedtest.net/result/c/f180e2b9-6123-4f62-b43d-b14a356d7777",
+      "persisted": true
+  }
+}
