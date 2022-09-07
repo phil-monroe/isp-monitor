@@ -25,6 +25,7 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
     raabro (1.4.0)
+    resolv (0.2.1)
     rufus-scheduler (3.8.2)
       fugit (~> 1.1, >= 1.1.6)
     tzinfo (2.0.5)
@@ -38,6 +39,7 @@ DEPENDENCIES
   logstash-logger
   net-ping
   pry
+  resolv
   rufus-scheduler
 
 BUNDLED WITH
