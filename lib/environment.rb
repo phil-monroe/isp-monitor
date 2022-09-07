@@ -8,7 +8,7 @@ LOGGER = LogStashLogger.new(
   type: :multi_delegator,
   outputs: [
     { type: :stdout },
-    # { type: :tcp, host: 'localhost', port: 50000 }
+    { type: :tcp, host: 'localhost', port: 50000 }
   ])
 
 def log_event(event, payload={})
