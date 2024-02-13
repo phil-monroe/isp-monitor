@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker stop monitor-ping
-docker rm --force monitor-ping
+docker stop monitor-mifi
+docker rm --force monitor-mifi
