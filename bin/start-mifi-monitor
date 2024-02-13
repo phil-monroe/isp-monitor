@@ -1,0 +1,13 @@
+#!/bin/bash
+
+docker stop monitor-ping
+docker rm --force monitor-ping
+
+docker run -d \
+  --name monitor-ping \
+  --net host \
+  --restart unless-stopped \
+  --env LOGSTASH_HOST=$LOGSTASH_HOST \
+  isp-monitor monitor-ping.rb $@
+
+docker logs --follow monitor-ping
