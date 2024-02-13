@@ -49,7 +49,7 @@ end
 
 scheduler do
   ARGV.map do |ping_target|
-    every '10s', overlap: false do
+    every '1m', overlap: false do
       ping ping_target
     end
   end
