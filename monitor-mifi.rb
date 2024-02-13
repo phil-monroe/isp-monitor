@@ -12,6 +12,8 @@ rescue StandardError => e
   puts e.backtrace
 end
 
+check!
+
 scheduler do
   every '1h', overlap: false do
     check!
