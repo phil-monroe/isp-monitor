@@ -10,4 +10,4 @@ docker run -d \
   --env LOGSTASH_HOST=$LOGSTASH_HOST \
   isp-monitor monitor-mifi.rb
 
-docker logs --follow monitor-ping
+docker logs --follow monitor-mifi
