@@ -5,6 +5,7 @@ require_relative 'lib/environment'
 
 def check!
   usage = http_get_json("http://192.168.1.1/apps_home/usageinfo")
+  usage[:totalShrUsage] = usage[:totalShrUsage].to_f # force cast to numeric
   log_event 'mifi-usage', usage
 
 rescue StandardError => e
