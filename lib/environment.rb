@@ -9,7 +9,7 @@ require 'json'
 LOGSTASH_HOST = ENV.fetch('LOGSTASH_HOST', '').strip.presence
 
 outputs = [ { type: :stdout } ]
-outputs << { type: :udp, host: LOGSTASH_HOST, port: 50000 } if LOGSTASH_HOST.present?
+outputs << { type: :tcp, host: LOGSTASH_HOST, port: 50000 } if LOGSTASH_HOST.present?
 
 LOGGER = LogStashLogger.new(type: :multi_delegator, outputs: outputs)
 
