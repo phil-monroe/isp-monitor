@@ -1,0 +1,13 @@
+#!/bin/bash
+
+docker stop monitor-healthcheck
+docker rm --force monitor-healthcheck
+
+docker run -d \
+  --name monitor-healthcheck \
+  --net host \
+  --restart unless-stopped \
+  --env LOGSTASH_HOST=$LOGSTASH_HOST \
+  isp-monitor monitor-healthcheck.rb $@
+
+docker logs --follow monitor-healthcheck

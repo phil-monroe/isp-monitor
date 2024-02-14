@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker stop monitor-healthcheck
+docker rm --force monitor-healthcheck
