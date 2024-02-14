@@ -35,8 +35,10 @@ def download(url)
   end
 
   duration_s = end_at - start_at
+  bits = size_bytes * 8
+  throughput_bps = bits / duration_s
   size_mb = size_bytes / 1024.0 / 1024.0
-  throughput_mbps = size_mb / duration_s
+  throughput_mbps = throughput_bps / 1000.0 / 1000.0
 
   {
     url:,
@@ -44,6 +46,7 @@ def download(url)
     duration_s:,
     size_bytes:,
     size_mb: size_mb.round(2),
+    throughput_bps: throughput_bps.round(2),
     throughput_mbps: throughput_mbps.round(2),
     response_code: res.code,
     response_headers: res.to_hash,
