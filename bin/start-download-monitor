@@ -1,0 +1,13 @@
+#!/bin/bash
+
+docker stop monitor-download
+docker rm --force monitor-download
+
+docker run -d \
+  --name monitor-download \
+  --net host \
+  --restart unless-stopped \
+  --env LOGSTASH_HOST=$LOGSTASH_HOST \
+  isp-monitor monitor-download.rb
+
+docker logs --follow monitor-download

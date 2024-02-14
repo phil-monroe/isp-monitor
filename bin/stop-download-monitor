@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker stop monitor-download
+docker rm --force monitor-download
