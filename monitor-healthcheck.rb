@@ -7,7 +7,7 @@ require_relative 'lib/environment'
 
 def check!
   uri = URI("https://hc-ping.com/5d4cb729-4c3a-405c-8e6c-c4d8c3d266c5")
-  res = Net::HTTP.get(uri)
+  res = Net::HTTP.get_response(uri)
 
   log_event 'healthcheck', {
     response_code: res.code
